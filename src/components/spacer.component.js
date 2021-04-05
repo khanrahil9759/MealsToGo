@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import React from "react";
-import { View } from "react-native";
 import styled, { useTheme } from "styled-components/native";
 
 const sizeVariant = {
@@ -16,26 +15,25 @@ const positionVariant = {
   bottom: "marginBottom",
 };
 
-const getVariant = (postion, size, theme) => {
-  const sizedIndex = sizeVariant[size];
-  const property = positionVariant[postion];
-  const value = theme.space[sizedIndex];
+const getVariant = (position, size, theme) => {
+  const sizeIndex = sizeVariant[size];
+  const property = positionVariant[position];
+  const value = theme.space[sizeIndex];
+
   return `${property}:${value}`;
 };
 
 const SpacerView = styled.View`
-  ${({ variant }) => variant}
+  ${({ variant }) => variant};
 `;
 
-const Spacer = ({ postion, size, children }) => {
+export const Spacer = ({ position, size, children }) => {
   const theme = useTheme();
-  const variant = getVariant(postion, size, theme);
-
+  const variant = getVariant(position, size, theme);
   return <SpacerView variant={variant}>{children}</SpacerView>;
 };
+
 Spacer.defaultProps = {
-  postion: "top",
+  position: "top",
   size: "small",
 };
-
-export default Spacer;
